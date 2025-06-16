@@ -1,8 +1,8 @@
-function x = mixedlcg(m,n,x0)
+function x = mixedlcg(m,n)
   a = 21 ;
   c = 53 ;
   m = m ;  % total num of random nums, parameter because maybe diff range
-  x0 = x0 ; % seed
+  x0 = floor(rand*m+1) ; % seed
   n = n ; % num of random nums user wants, based on num of vehicles
   x= zeros(n,1);
   x(1) = x0;
