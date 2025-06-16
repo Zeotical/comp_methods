@@ -1,6 +1,7 @@
 customers = 0;
 numofcust = 1;
 random_num_generator = 0;
+x = floor(rand*1000+1); % see
 rn_arrive = 0 ; %random er-arrival first seed
 rn_service = rand() ; % 101 ; %random service time first seed
 %random_rn_arrive( &rn_arrive); %reduntant
@@ -21,8 +22,10 @@ customers = input("Enter number of customers: ") ;
 disp(" ") ;
 disp ('Cust no   Rn ariiv   Inter arriv   Arriv time   Rn serv   Serv begin    Serv time     Serv ends     Time in system     Waiting time');
 
-% printing values to table
+% printing values to table + loop
 for numofcust=1:customers
- fprintf('%2.0f\n', [numofcust]);
+     x = mixedlcg(x,numofcust);
+
+ fprintf('%2.0f %10d\n', [numofcust,x]);
 end
 

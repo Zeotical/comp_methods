@@ -1,12 +1,10 @@
-function x = mixedlcg(m,n)
+function x = mixedlcg(x,numofcust)
   a = 21 ;
   c = 53 ;
-  m = m ;  % total num of random nums, parameter because maybe diff range
-  x0 = floor(rand*m+1) ; % seed
-  n = n ; % num of random nums user wants, based on num of vehicles
-  x= zeros(n,1);
-  x(1) = x0;
-  for i=2:(n)
-    x(i) = mod((a*x(i-1)+c),m);
-  endfor
+  m = 1000 ;  % total num of random nums, parameter because maybe diff range
+  if (numofcust == 1)
+  x = x;
+  else
+  x = mod((a*x+c),m);
+  end
 
