@@ -5,9 +5,10 @@ rn_arrive = floor(rand*1000+1); %random inter-arrival first seed 0 - 1000
 rn_service = floor(rand*100+1) ; % 101 ; %random service time first seed 0 - 100
 prev_arrival_time = 0 ;
 time_service_ends = 0;
+pseudo = 0 ;
 
 % later print one by one
-choices = ['1. Mixed LCG', '2. Multiplicative LCG', '3. Additive LCG'];
+choices = ['1. Mixed LCG ', '2. Multiplicative LCG ', '3. Additive LCG ' , 'Randi ?'];
 printf('%s\n', choices);
 table_values = []; %clear the matrix after each run
 random_num_generator = input("Pick a random number generator doesnt do anythignyet: ") ;
@@ -18,7 +19,9 @@ disp ('number       petrol    (litre)        (RM)       Rn ariiv   Inter arriv  
 
 
 % printing values to table + l
+line_num = 1 ;%floor(rand*3) ; %to be appended
 for numofcust=1:customers
+
      rn_arrive = mixedlcg(rn_arrive,numofcust);
      Inter_arriv = arrive_range(rn_arrive);
      Arrival_time = Inter_arriv + prev_arrival_time ;
@@ -30,14 +33,15 @@ for numofcust=1:customers
      time_in_system = time_service_ends - Arrival_time;
      prev_arrival_time = Inter_arriv + prev_arrival_time ;
 
-      table_values (numofcust,:) =  [numofcust rn_arrive Inter_arriv Arrival_time rn_service serv_begins Service_time time_service_ends waiting_time time_in_system];
-
-      %table2_values (numofcust,:) =  [numofcust]
+     if (line_num==1)
 
 
- fprintf('%2.0f %10d %10d %12d %14d %10d %10d %14d %18d %14d\n', [numofcust,rn_arrive,Inter_arriv,Arrival_time, rn_service, serv_begins, Service_time, time_service_ends,waiting_time, time_in_system]);
+     table_values (numofcust,:) =  [numofcust pseudo  pseudo pseudo  rn_arrive Inter_arriv Arrival_time line_num rn_service serv_begins Service_time time_service_ends];
 
-end
+
+ fprintf('%2.0f %13d %13d %12d %12d %12d %12d %12d %12d %10d %10d %10d\n', [numofcust,pseudo,pseudo,pseudo,rn_arrive,Inter_arriv,Arrival_time, line_num, rn_service, serv_begins, Service_time, time_service_ends]);
+endif
+endfor
 
 %Dealing with second part of the table
 disp(" ");
@@ -47,5 +51,5 @@ disp ('Vehicle No  Serv begin    Serv time     Serv ends      Serv begin    Serv
 
 
 for i=1:customers
- fprintf('%2.0f %10d %10d %12d %14d %10d %10d %14d %18d %14d\n',  table_values(i,:));
+ %fprintf('%2.0f %10d %10d %12d %14d %10d %10d %14d %18d %14d\n',  table_values(i,:));
 endfor

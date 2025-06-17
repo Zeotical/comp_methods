@@ -11,5 +11,8 @@ function service_time = service_range(random_rn_service)
          service_time = 5;
     elseif (96<=random_rn_service && random_rn_service <=100)
          service_time = 6;
+    else
+    service_time = 0; %handle this should not get 0
+
     end
 end
