@@ -20,6 +20,7 @@ disp ('number       petrol    (litre)        (RM)       Rn ariiv   Inter arriv  
 
 % printing values to table + l
 line_num = 1 ;%floor(rand*3) ; %to be appended
+prev_service_end_time = 0;
 for numofcust=1:customers
 
      rn_arrive = mixedlcg(rn_arrive,numofcust);
@@ -33,13 +34,23 @@ for numofcust=1:customers
      time_in_system = time_service_ends - Arrival_time;
      prev_arrival_time = Inter_arriv + prev_arrival_time ;
 
-     if (line_num==1)
-
+     if (line_num==1 && Arrival_time > prev_service_end_time)
 
      table_values (numofcust,:) =  [numofcust pseudo  pseudo pseudo  rn_arrive Inter_arriv Arrival_time line_num rn_service serv_begins Service_time time_service_ends];
 
+     fprintf('%2.0f %13d %13d %12d %12d %12d %12d %12d %12d %10d %10d %10d\n', [numofcust,pseudo,pseudo,pseudo,rn_arrive,Inter_arriv,Arrival_time, line_num, rn_service, serv_begins, Service_time, time_service_ends]);
+     prev_service_end_time = time_service_ends;
 
- fprintf('%2.0f %13d %13d %12d %12d %12d %12d %12d %12d %10d %10d %10d\n', [numofcust,pseudo,pseudo,pseudo,rn_arrive,Inter_arriv,Arrival_time, line_num, rn_service, serv_begins, Service_time, time_service_ends]);
+elseif(line_num == 1 && Arrival_time < prev_service_end_time)
+pump3 = 0;
+pump4 = 0;
+
+%deal with table one can jus access matrix rows and cols to add what I want here no need all this yapping
+ table_values (numofcust,:) =  [numofcust pseudo  pseudo pseudo  rn_arrive Inter_arriv Arrival_time line_num pseudo pseudo pseudo pseudo];
+ fprintf('%2.0f %13d %13d %12d %12d %12d %12d %12d %12d %10d %10d %10d\n', [numofcust,pseudo,pseudo,pseudo,rn_arrive,Inter_arriv,Arrival_time, line_num, pseudo, pseudo, pseudo, pseudo]);
+
+table2_values (numofcust,:) = [numofcust serv_begins Service_time time_service_ends pump3 pump3 pump4 pump4 pump4 waiting_time time_in_system ];
+prev_service_end_time = time_service_ends;
 endif
 endfor
 
@@ -51,5 +62,5 @@ disp ('Vehicle No  Serv begin    Serv time     Serv ends      Serv begin    Serv
 
 
 for i=1:customers
- %fprintf('%2.0f %10d %10d %12d %14d %10d %10d %14d %18d %14d\n',  table_values(i,:));
+ fprintf('%2.0f %13d %13d %12d %12d %12d %12d %12d %12d %10d %10d %18d %10d\n',  table2_values(i,:));
 endfor
