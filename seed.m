@@ -14,8 +14,7 @@ random_num_generator = input("Pick a random number generator doesnt do anythigny
 customers = input("Enter number of customers: ") ;
 disp(" ") ;
 disp ('Cust no   Rn ariiv   Inter arriv   Arriv time   Rn serv   Serv begin    Serv time     Serv ends     Waiting time     Time in system');
-%disp(" ");
-  i = 0;
+
 
 % printing values to table + l
 for numofcust=1:customers
@@ -30,15 +29,21 @@ for numofcust=1:customers
      time_in_system = time_service_ends - Arrival_time;
      prev_arrival_time = Inter_arriv + prev_arrival_time ;
 
-     table_values (numofcust,:) =  [numofcust rn_arrive Inter_arriv Arrival_time rn_service serv_begins Service_time time_service_ends waiting_time time_in_system];
+      table_values (numofcust,:) =  [numofcust rn_arrive Inter_arriv Arrival_time rn_service serv_begins Service_time time_service_ends waiting_time time_in_system];
+
+      %table2_values (numofcust,:) =  [numofcust]
 
 
  fprintf('%2.0f %10d %10d %12d %14d %10d %10d %14d %18d %14d\n', [numofcust,rn_arrive,Inter_arriv,Arrival_time, rn_service, serv_begins, Service_time, time_service_ends,waiting_time, time_in_system]);
 
 end
- %fprintf('%2.0f %10d %10d %12d %14d %10d %10d %14d %18d %14d\n', [numofcust,rn_arrive,Inter_arriv,Arrival_time, rn_service, serv_begins, Service_time, time_service_ends,waiting_time, time_in_system]);
-% table_values
-disp ('TABLE 2   Rn ariiv   Inter arriv   Arriv time   Rn serv   Serv begin    Serv time     Serv ends     Waiting time     Time in system');
+
+%Dealing with second part of the table
+disp(" ");
+
+disp (' Customer                   Pump 2                                    Pump 3                                 Pump 4 ');
+disp ('Vehicle No  Serv begin    Serv time     Serv ends      Serv begin    Serv time     Serv ends   Serv begin    Serv time     Serv ends Waiting time     Time in system');
+
 
 for i=1:customers
  fprintf('%2.0f %10d %10d %12d %14d %10d %10d %14d %18d %14d\n',  table_values(i,:));
