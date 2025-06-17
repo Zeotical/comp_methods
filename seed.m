@@ -49,7 +49,7 @@ pump4 = 0;
  table_values (numofcust,:) =  [numofcust pseudo  pseudo pseudo  rn_arrive Inter_arriv Arrival_time line_num pseudo pseudo pseudo pseudo];
  fprintf('%2.0f %13d %13d %12d %12d %12d %12d %12d %12d %10d %10d %10d\n', [numofcust,pseudo,pseudo,pseudo,rn_arrive,Inter_arriv,Arrival_time, line_num, pseudo, pseudo, pseudo, pseudo]);
 
-table2_values (numofcust,:) = [numofcust serv_begins Service_time time_service_ends pump3 pump3 pump4 pump4 pump4 waiting_time time_in_system ];
+table (numofcust,:) = [numofcust serv_begins Service_time time_service_ends pump3 pump3 pump3 pump4 pump4 pump4 waiting_time time_in_system ];
 prev_service_end_time = time_service_ends;
 endif
 endfor
@@ -62,5 +62,5 @@ disp ('Vehicle No  Serv begin    Serv time     Serv ends      Serv begin    Serv
 
 
 for i=1:customers
- fprintf('%2.0f %13d %13d %12d %12d %12d %12d %12d %12d %10d %10d %18d %10d\n',  table2_values(i,:));
+ fprintf('%2.0f %13d %13d %12d %12d %12d %12d %12d %12d %10d %10d %10d\n',  table(i,:));
 endfor
