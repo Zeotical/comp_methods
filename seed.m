@@ -13,7 +13,8 @@ table_values = []; %clear the matrix after each run
 random_num_generator = input("Pick a random number generator doesnt do anythignyet: ") ;
 customers = input("Enter number of customers: ") ;
 disp(" ") ;
-disp ('Cust no   Rn ariiv   Inter arriv   Arriv time   Rn serv   Serv begin    Serv time     Serv ends     Waiting time     Time in system');
+disp ('Vehicle      Type of   Quantity   Total Price                                          Line                                    Pump 1');
+disp ('number       petrol    (litre)        (RM)       Rn ariiv   Inter arriv   Arriv time   number       Rn serv   Serv begin    Serv time     Serv ends ');
 
 
 % printing values to table + l
@@ -42,7 +43,7 @@ end
 disp(" ");
 
 disp (' Customer                   Pump 2                                    Pump 3                                 Pump 4 ');
-disp ('Vehicle No  Serv begin    Serv time     Serv ends      Serv begin    Serv time     Serv ends   Serv begin    Serv time     Serv ends Waiting time     Time in system');
+disp ('Vehicle No  Serv begin    Serv time     Serv ends      Serv begin    Serv time     Serv ends   Serv begin    Serv time     Serv ends   Waiting time     Time in system');
 
 
 for i=1:customers
