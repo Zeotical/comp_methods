@@ -10,13 +10,16 @@ time_service_ends = 0;
 choices = ['1. Mixed LCG', '2. Multiplicative LCG', '3. Additive LCG'];
 printf('%s\n', choices);
 
-random_num_generator = input("Pick a random number generator: ") ;
+random_num_generator = input("Pick a random number generator doesnt do anythignyet: ") ;
 customers = input("Enter number of customers: ") ;
 disp(" ") ;
 disp ('Cust no   Rn ariiv   Inter arriv   Arriv time   Rn serv   Serv begin    Serv time     Serv ends     Waiting time     Time in system');
+%disp(" ");
+%disp ('TABLE 2   Rn ariiv   Inter arriv   Arriv time   Rn serv   Serv begin    Serv time     Serv ends     Waiting time     Time in system');
 
 % printing values to table + l
 for numofcust=1:customers
+  i = 0;
      rn_arrive = mixedlcg(rn_arrive,numofcust);
      Inter_arriv = arrive_range(rn_arrive);
      Arrival_time = Inter_arriv + prev_arrival_time ;
@@ -28,6 +31,12 @@ for numofcust=1:customers
      time_in_system = time_service_ends - Arrival_time;
      prev_arrival_time = Inter_arriv + prev_arrival_time ;
 
- fprintf('%2.0f %10d %10d %12d %14d %10d %10d %14d %18d %14d\n', [numofcust,rn_arrive,Inter_arriv,Arrival_time, rn_service, serv_begins, Service_time, time_service_ends,waiting_time, time_in_system]);
+     table_values = [numofcust,rn_arrive,Inter_arriv,Arrival_time, rn_service, serv_begins, Service_time, time_service_ends,waiting_time, time_in_system;] ;
+
+ fprintf('%2.0f %10d %10d %12d %14d %10d %10d %14d %18d %14d\n', [table_values]);
+
+ %fprintf('%2.0f %10d %10d %12d %14d %10d %10d %14d %18d %14d\n', [numofcust,rn_arrive,Inter_arriv,Arrival_time, rn_service, serv_begins, Service_time, time_service_ends,waiting_time, time_in_system]);
+
 end
+ %fprintf('%2.0f %10d %10d %12d %14d %10d %10d %14d %18d %14d\n', [numofcust,rn_arrive,Inter_arriv,Arrival_time, rn_service, serv_begins, Service_time, time_service_ends,waiting_time, time_in_system]);
 
