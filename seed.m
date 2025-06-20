@@ -1,8 +1,8 @@
 customers = 0;
 numofcust = 1;
 random_num_generator = 0;
-rn_arrive = floor(rand*1000+1); %random inter-arrival first seed 0 - 1000
-rn_service = floor(rand*100+1) ; % 101 ; %random service time first seed 0 - 100
+rn_arrive = floor(rand*1000); %random inter-arrival first seed 0 - 999
+rn_service = floor(rand*100) ; % 101 ; %random service time first seed 0 - 99
 time_service_ends = 0;
 pseudo = 0 ;
 
@@ -11,6 +11,7 @@ choices = ['1. Mixed LCG ', '2. Multiplicative LCG ', '3. Additive LCG ' , 'Rand
 printf('%s\n', choices);
 table_values = []; %clear the matrix after each run
 random_num_generator = input("Pick a random number generator doesnt do anythignyet: ") ;
+simulation_type = input("Simulate for: 1) Peak hours 2)Non-Peak hours :") ;
 customers = input("Enter number of customers: ") ;
 disp(" ") ;
 disp ('Vehicle      Type of   Quantity   Total Price                                          Line                                    Pump 1');
@@ -30,9 +31,8 @@ pump = 0;
 
 for numofcust=1:customers
      line_num = line_numm(numofcust);
-
      rn_arrive = mixedlcg(rn_arrive,numofcust);
-     Inter_arriv = arrive_range(rn_arrive);
+     Inter_arriv = arrive_range(rn_arrive,simulation_type);
      Arrival_time = Inter_arriv + prev_arrival_time ;
      rn_service = random_rn_service(rn_service,numofcust);
      [pump,serv_begins] = pump_Servtime(Arrival_time,p1_time_service_ends,p2_time_service_ends,p3_time_service_ends,p4_time_service_ends,line_num,pump,serv_begins) ;
