@@ -3,6 +3,7 @@ numofcust = 1;
 random_num_generator = 0;
 rn_arrive = floor(rand*1000); %random inter-arrival first seed 0 - 999
 rn_service = floor(rand*100) ; % 101 ; %random service time first seed 0 - 99
+prev_arrival_time = 0 ;
 time_service_ends = 0;
 pseudo = 0 ;
 
@@ -39,6 +40,7 @@ for numofcust=1:customers
      Service_time = service_range(rn_service); %how long service is
      time_service_ends = Service_time + serv_begins ;
      waiting_time = serv_begins - Arrival_time;
+     prev_arrival_time = Inter_arriv + prev_arrival_time ;
      time_in_system = time_service_ends - Arrival_time;
 
      % Line 1 pump 1
