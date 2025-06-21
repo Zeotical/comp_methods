@@ -1,10 +1,13 @@
 customers = 0;
 numofcust = 1;
 random_num_generator = 0;
-rn_arrive = floor(rand*1000); %random inter-arrival first seed 0 - 999
-rn_service = floor(rand*100) ; % 101 ; %random service time first seed 0 - 99
+rn_arrive = floor(rand*1000); %random inter-arrival + petrol type first seed 0 - 999
+rn_service = floor(rand*100) ; %random service time first seed 0 - 99
 prev_arrival_time = 0 ;
 time_service_ends = 0;
+total_waiting_time = 0;
+total_time_in_system = 0;
+prob_waiting_time = 0;
 pseudo = 0 ;
 
 % later print one by one
@@ -46,6 +49,12 @@ for numofcust=1:customers
      prev_arrival_time = Inter_arriv + prev_arrival_time ;
      time_in_system = time_service_ends - Arrival_time;
      [petrol_num,petrol] = petrol_type(rn_arrive) ;
+     total_waiting_time = waiting_time + total_waiting_time;
+     total_time_in_system = time_in_system + total_time_in_system;
+
+     if(waiting_time!=0)
+     prob_waiting_time = prob_waiting_time + 1
+     endif
 
      % Line 1 pump 1
      if(pump == 1)
@@ -131,6 +140,20 @@ disp ('Vehicle No  Serv begin    Serv time     Serv ends      Serv begin    Serv
 for i=1:customers
  %fprintf('%2.0f %13d %13d %14d %14d %14d %12d %14d %12d %12d %14d %14d\n',  table(i,:));
  fprintf('%2s %14s %14s %14s %12s %12s %12s %12s %12s %12s %14s %14s\n', cell2{i,:} );
-
 endfor
+
+disp('***** RESULTS OF THE SIMULATION ****')
+disp('Average waiting time: ')
+total_waiting_time/customers
+disp('Average time spent in system: ')
+fprintf ('%2f\n', total_time_in_system/customers);
+disp('Probability that a customer has to wait: ')
+fprintf ('%2f\n', prob_waiting_time/customers);
+disp('Average service time at pump 1: ')
+disp('Average service time at pump 2: ')
+disp('Average service time at pump 3: ')
+disp('Average service time at pump 4: ')
+
+
+
 
