@@ -8,12 +8,13 @@ time_service_ends = 0;
 pseudo = 0 ;
 
 % later print one by one
+printNonPeakTable();
 choices = ['1. Mixed LCG ', '2. Multiplicative LCG ', '3. Additive LCG ' , 'Randi ?'];
 printf('%s\n', choices);
 table_values = []; %clear the matrix after each run
 random_num_generator = input("Pick a random number generator doesnt do anythignyet: ") ;
 simulation_type = input("Simulate for: 1) Peak hours 2)Non-Peak hours :") ;
-customers = input("Enter number of customers: ") ;
+customers = input("Enter number of vehicles: ") ;
 disp(" ") ;
 disp ('Vehicle      Type of   Quantity   Total Price                                          Line                                    Pump 1');
 disp ('number       petrol    (litre)        (RM)       Rn ariiv   Inter arriv   Arriv time   number       Rn serv   Serv begin    Serv time     Serv ends ');
