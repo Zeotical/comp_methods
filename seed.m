@@ -3,6 +3,7 @@ numofcust = 1;
 random_num_generator = 0;
 rn_arrive = floor(rand*1000); %random inter-arrival + petrol type first seed 0 - 999
 rn_service = floor(rand*100) ; %random service time first seed 0 - 99
+rn_petrol = floor(rand*100) ; %random petrol type first seed 0 - 99
 serv_begins = 0;
 prev_arrival_time = 0 ;
 time_service_ends = 0;
@@ -51,17 +52,18 @@ row=1;
 for numofcust=1:customers
      line_num = line_numm(numofcust);
      rn_arrive = mixedlcg(rn_arrive,numofcust);
+     rn_petrol = rng_petrol(rn_petrol,numofcust);
      Inter_arriv = arrive_range(rn_arrive,simulation_type);
      Arrival_time = Inter_arriv + prev_arrival_time ;
-     rn_service = random_rn_service(rn_service,numofcust);
+     rn_service = rng_service(rn_service,numofcust);
      [pump,serv_begins] = pump_Servtime(Arrival_time,p1_time_service_ends,p2_time_service_ends,p3_time_service_ends,p4_time_service_ends,line_num,pump,serv_begins) ;
      Service_time = service_range(rn_service); %how long service is
      time_service_ends = Service_time + serv_begins ;
      waiting_time = serv_begins - Arrival_time;
      prev_arrival_time = Inter_arriv + prev_arrival_time ;
      time_in_system = time_service_ends - Arrival_time;
-     [petrol_num,petrol,price_per_litre] = petrol_type(rn_arrive) ;
-     Quantity = rn_service;
+     [petrol_num,petrol,price_per_litre] = petrol_type(rn_petrol) ;
+     Quantity = rn_petrol;
      Price = Quantity * price_per_litre;
 
      % Evaluation of simulation
@@ -165,7 +167,7 @@ endfor
 %Dealing with second part of the table (display)
 disp(" ");
 
-disp (' Customer                     Pump 2                                    Pump 3                                 Pump 4 ');
+disp (' Customer                      Pump 2                                    Pump 3                                 Pump 4 ');
 disp (' Vehicle         Time        Refueling      Time              Time     Refueling      Time           Time     Refueling       Time    Waiting time     Time in system');
 disp (' Number          begins        time         ends             begins      time         ends           begins     time          ends');
 
@@ -181,20 +183,20 @@ disp(" ");
 cell3_sorted = cell3(idx,:) ;
 cell3_sorted_col = cell3_sorted(:,3) ;
 
-for i=1:customers
+for i=1:customers*2
  fprintf('%14s\n', cell3_sorted_col{i} );
 endfor
 disp('')
 disp('***** RESULTS OF THE SIMULATION ****')
 disp('')
-fprintf("Average inter-arrival time: %d\n",total_inter_arrival/customers);
-fprintf("Average waiting time: %d",total_waiting_time/customers);
-fprintf("Average time spent in system: %d\n",total_time_in_system/customers);
+fprintf("Average inter-arrival time: %d mins\n",total_inter_arrival/customers);
+fprintf("Average waiting time: %d mins\n",total_waiting_time/customers);
+fprintf("Average time spent in system: %d mins\n",total_time_in_system/customers);
 fprintf("Probability that a customer has to wait: %d\n",prob_waiting_time/customers);
-fprintf("Average service time at pump 1: %d\n",p1_total_serv/customers);
-fprintf("Average service time at pump 2: %d\n",p2_total_serv/customers);
-fprintf("Average service time at pump 3: %d\n",p3_total_serv/customers);
-fprintf("Average service time at pump 4: %d\n",p4_total_serv/customers);
+fprintf("Average service time at pump 1: %d mins\n",p1_total_serv/customers);
+fprintf("Average service time at pump 2: %d mins\n",p2_total_serv/customers);
+fprintf("Average service time at pump 3: %d mins\n",p3_total_serv/customers);
+fprintf("Average service time at pump 4: %d mins\n\n",p4_total_serv/customers);
 
 
 
