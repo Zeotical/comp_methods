@@ -22,6 +22,8 @@ printf('\n');
 peakTable();
 printf('\n');
 printNonPeakTable();
+petrol_type_distribution
+refueling_time_distribution
 choices = ['1. Mixed LCG ', '2. Multiplicative LCG ', '3. Additive LCG ' , 'Randi ?'];
 printf('%s\n', choices);
 table_values = []; %clear the matrix after each run
