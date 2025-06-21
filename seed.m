@@ -18,6 +18,9 @@ p3_total_serv = 0;
 p4_total_serv = 0;
 
 % later print one by one
+printf('\n');
+peakTable();
+printf('\n');
 printNonPeakTable();
 choices = ['1. Mixed LCG ', '2. Multiplicative LCG ', '3. Additive LCG ' , 'Randi ?'];
 printf('%s\n', choices);
