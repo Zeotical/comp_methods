@@ -17,12 +17,8 @@ p2_total_serv = 0;
 p3_total_serv = 0;
 p4_total_serv = 0;
 
-printf('\n');
-peakTable();
-printf('\n');
-printNonPeakTable();
-petrol_type_distribution
-refueling_time_distribution
+disp("")
+printTables
 choices = ['1.Mixed LCG\n', '2.Multiplicative LCG\n', '3.Additive LCG\n' ];
 fprintf(choices);
 RNG = input("Pick a random number generator from the above : ") ;
