@@ -25,7 +25,6 @@ elseif (RNG == 2)
     end
 % additive lcg
 elseif (RNG == 3)
-
     c = 51 ;
     m = 1000;
     if (numofcust == 1)

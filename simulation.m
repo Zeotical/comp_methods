@@ -7,6 +7,8 @@ rn_petrol = floor(rand*100) ; %random petrol type first seed 0 - 99
 serv_begins = 0;
 prev_arrival_time = 0 ;
 time_service_ends = 0;
+cell3 = {};  % resets the cell so it’s empty at the start instead of using clear in command window
+
 % Evaluation of simulation
 total_inter_arrival = 0;
 total_waiting_time = 0;
