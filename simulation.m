@@ -1,7 +1,7 @@
 customers = 0;
 numofcust = 1;
 random_num_generator = 0;
-rn_arrive = floor(rand*1000); %random inter-arrival + petrol type first seed 0 - 999
+rn_arrive = floor(rand*1000); %random inter-arrival first seed 0 - 999
 rn_service = floor(rand*100) ; %random service time first seed 0 - 99
 rn_petrol = floor(rand*100) ; %random petrol type first seed 0 - 99
 serv_begins = 0;
@@ -47,11 +47,11 @@ row=1;
 
 for numofcust=1:customers
      line_num = line_numm(numofcust);
-     rn_arrive = mixedlcg(rn_arrive,numofcust);
-     rn_petrol = rng_petrol(rn_petrol,numofcust);
+     rn_arrive = rng_arrival(rn_arrive,numofcust,RNG);
+     rn_petrol = rng_petrol(rn_petrol,numofcust,RNG);
      Inter_arriv = arrive_range(rn_arrive,simulation_type);
      Arrival_time = Inter_arriv + prev_arrival_time ;
-     rn_service = rng_service(rn_service,numofcust);
+     rn_service = rng_service(rn_service,numofcust,RNG);
      [pump,serv_begins] = pump_Servtime(Arrival_time,p1_time_service_ends,p2_time_service_ends,p3_time_service_ends,p4_time_service_ends,line_num,pump,serv_begins) ;
      Service_time = service_range(rn_service); %how long service is
      time_service_ends = Service_time + serv_begins ;
