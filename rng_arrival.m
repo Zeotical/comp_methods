@@ -1,5 +1,5 @@
 function rn_arrive = rng_arrival(rn_arrive,numofcust,RNG)
-\ % mixed lcg
+ % mixed lcg
  if (RNG == 1)
     a = 21 ;
     c = 53 ;
