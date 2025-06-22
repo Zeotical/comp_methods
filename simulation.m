@@ -28,8 +28,8 @@ simulation_type = input("Simulate for: 1)Peak hours 2)Non-Peak hours :") ;
 customers = input("Enter number of vehicles: ") ;
 disp(" ") ;
 disp ('Vehicle      Type of   Quantity    Total Price       Random Number     Inter       Arrival      Line         Random Number               Pump 1');
-disp ('number       petrol    (litre)        (RM)         for inter-arrival  Arrival       time        number       for Refueling   Refueling    Time     Time');
-disp ('                                                         time          time                                      time           time      begins    ends');
+disp ('number       petrol    (litre)        (RM)         for inter-arrival  Arrival       time        number       for Refueling      Time    Refueling    Time');
+disp ('                                                         time          time                                      time           begins    time       ends');
 
 
 
@@ -48,6 +48,24 @@ pump = 0;
 row=1;
 
 for numofcust=1:customers
+  if(numofcust == 1)
+   line_num = line_numm(numofcust);
+     rn_arrive = "-";
+     rn_petrol = rng_petrol(rn_petrol,numofcust,RNG);
+     Inter_arriv = 0;
+     Arrival_time = Inter_arriv + prev_arrival_time ;
+     rn_service = rng_service(rn_service,numofcust,RNG);
+     [pump,serv_begins] = pump_Servtime(Arrival_time,-1,p2_time_service_ends,p3_time_service_ends,p4_time_service_ends,line_num,pump,serv_begins) ;
+     Service_time = service_range(rn_service); %how long service is
+     time_service_ends = Service_time + serv_begins ;
+     waiting_time = serv_begins - Arrival_time;
+     prev_arrival_time = Inter_arriv + prev_arrival_time ;
+     time_in_system = time_service_ends - Arrival_time;
+     [petrol_num,petrol,price_per_litre] = petrol_type(rn_petrol) ;
+     Quantity = rn_petrol;
+     Price = Quantity * price_per_litre;
+
+  else
      line_num = line_numm(numofcust);
      rn_arrive = rng_arrival(rn_arrive,numofcust,RNG);
      rn_petrol = rng_petrol(rn_petrol,numofcust,RNG);
@@ -63,6 +81,8 @@ for numofcust=1:customers
      [petrol_num,petrol,price_per_litre] = petrol_type(rn_petrol) ;
      Quantity = rn_petrol;
      Price = Quantity * price_per_litre;
+
+   endif
 
      % Evaluation of simulation
      total_waiting_time = waiting_time + total_waiting_time;
@@ -83,8 +103,8 @@ for numofcust=1:customers
 
        % Saving values to cell for displaying
 
-       cell = {numofcust,petrol,Quantity,Price,rn_arrive,Inter_arriv,Arrival_time, line_num, rn_service,p1_serv_begins, p1_Service_time, p1_time_service_ends};
-       fprintf('%3d %15s %7d %15d %16d %12d %13d %11d %16d %13d %10d %8d\n', cell{:});
+       cell = {numofcust,petrol,Quantity,Price,num2str(rn_arrive),Inter_arriv,Arrival_time, line_num,rn_service,p1_serv_begins, p1_Service_time, p1_time_service_ends};
+       fprintf('%3d %15s %7d %15d %16s %12d %13d %11d %16d %13d %10d %8d\n', cell{:});
 
        cell2 (numofcust,:) = {num2str(numofcust),pump2_disp,pump2_disp,pump2_disp,pump3_disp,pump3_disp,pump3_disp,pump4_disp,pump4_disp,pump4_disp,num2str(waiting_time),num2str(time_in_system)} ;
 
@@ -160,7 +180,12 @@ for numofcust=1:customers
          row = row + 2;
 
 endif
+if(numofcust == 1)
+rn_arrive = floor(rand*1000); %random inter-arrival first seed 0 - 999
+endif
+
 endfor
+
 
 %Dealing with second part of the table (display)
 disp(" ");
@@ -187,7 +212,7 @@ endfor
 disp('')
 disp('***** RESULTS OF THE SIMULATION ****')
 disp('')
-fprintf("Average inter-arrival time: %d mins\n",total_inter_arrival/customers);
+fprintf("Average inter-arrival time: %d mins\n",total_inter_arrival/(customers-1));
 fprintf("Average waiting time: %d mins\n",total_waiting_time/customers);
 fprintf("Average time spent in system: %d mins\n",total_time_in_system/customers);
 fprintf("Probability that a customer has to wait: %d\n",prob_waiting_time/customers);
