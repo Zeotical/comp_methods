@@ -1,4 +1,4 @@
-function rn_petrol =  rng_petrol(rn_petrol,numofcust) % currently just using mixed lcg
+function rn_petrol =  rng_petrol(rn_petrol,numofcust,RNG)
   a = 21 ;
   c = 53 ;
   m = 100 ;  % total num of random nums
